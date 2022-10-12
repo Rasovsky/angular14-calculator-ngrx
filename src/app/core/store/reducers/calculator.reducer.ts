@@ -141,10 +141,13 @@ export function calculatorReducer(
         };
       }
       if (state.secondNumber && state.firstNumber) {
+        let total: number = getTotal(state);
         return {
           ...state,
-          firstNumber: getTotal(state),
-          currentOperation: action.payload,
+          firstNumber: total,
+          secondNumber: null,
+          currentOperation: null,
+          history: [...state.history, total],
         };
       }
       return state;
