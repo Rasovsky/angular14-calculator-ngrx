@@ -1,0 +1,119 @@
+
+<section class="container mt-5">
+        <div class="row">
+            <div class="col-lg-4"></div>
+            <div class="col-lg-4">
+                <div class="calculator-wrapper">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-control history-of-calculations-wrapper text-right">
+                            <div *ngFor="let historyNumber of calculatorState.history">
+                                {{historyNumber}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 mt-2">
+                        <div class="form-control value-calculator-wrapper text-right">
+                            <span class="first-num">
+                                <span *ngIf="calculatorState.negativeMode">
+                                    {{"-"}}
+                                </span>
+                                {{calculatorState.firstNumber}}
+                                <span *ngIf="calculatorState.decimalSeparator && !calculatorState.secondNumber">
+                                   .
+                                </span>
+                            </span>
+                            <span class="op">
+                                {{calculatorState.currentOperation}}
+                            </span>
+                            <span class="second-num">
+                                {{calculatorState.secondNumber}}
+                                <span *ngIf="calculatorState.decimalSeparator && calculatorState.secondNumber && calculatorState.currentOperation">
+                                   .
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <div class="col-3">
+                        <button type="button" class="btn btn-secondary btn-calculator"
+                                (click)="clear()"
+                        >
+                            <span *ngIf="calculatorState.secondNumber || calculatorState.currentOperation || calculatorState.firstNumber">C</span>
+                            <span *ngIf="!(calculatorState.secondNumber || calculatorState.currentOperation || calculatorState.firstNumber)">AC</span>
+                        </button>
+                    </div>
+                    <div class="col-3">
+                        <button type="button" class="btn btn-secondary btn-calculator" (click)="dispatchNegate()">+ / -</button>
+                    </div>
+                    <div class="col-3">
+                        <button type="button" class="btn btn-secondary btn-calculator"
+                                (click)="dispatchOp('%')"
+                        >%</button>
+                    </div>
+                    <div class="col-3">
+                        <button type="button" class="btn btn-secondary btn-calculator"
+                                (click)="dispatchOp('/')"
+                        >&#247;</button>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-3" *ngFor="let num of [7,8,9]">
+                        <button type="button" class="btn btn-secondary btn-calculator"
+                                (click)="dispatchNumberClicked(num)"
+                        >{{num}}</button>
+                    </div>
+                    <div class="col-3">
+                        <button type="button" class="btn btn-secondary btn-calculator"
+                                (click)="dispatchOp('*')"
+                        >&#215;</button>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-3" *ngFor="let num of [4,5,6]">
+                        <button type="button" class="btn btn-secondary btn-calculator"
+                                (click)="dispatchNumberClicked(num)"
+                        >{{num}}</button>
+                    </div>
+                    <div class="col-3">
+                        <button type="button" class="btn btn-secondary btn-calculator"
+                                (click)="dispatchOp('-')"
+                        >&#8722;</button>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-3" *ngFor="let num of [1,2,3]">
+                        <button type="button" class="btn btn-secondary btn-calculator"
+                                (click)="dispatchNumberClicked(num)"
+                        >{{num}}</button>
+                    </div>
+                    <div class="col-3">
+                        <button type="button" class="btn btn-secondary btn-calculator"
+                                (click)="dispatchOp('+')"
+                        >+</button>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-6">
+                        <button type="button" class="btn btn-secondary btn-calculator"
+                                (click)="dispatchNumberClicked(0)"
+                        >0</button>
+                    </div>
+                    <div class="col-3">
+                        <button type="button" class="btn btn-secondary btn-calculator"
+                                (click)="dispatchDecimalSeparator()"
+                        >&#9110;</button>
+                    </div>
+                    <div class="col-3">
+                        <button type="button" class="btn btn-secondary btn-calculator"
+                                (click)="getTotal()"
+                        >&#61;</button>
+                    </div>
+                </div>
+                </div>
+
+            </div>
+            <div class="col-lg-4"></div>
+        </div>
+</section>
